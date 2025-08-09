@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>⚠ SISTEM DIRETAS ⚠</title>
+<style>
+  body {margin:0; font-family: monospace; background:black; color:red; overflow:hidden;}
+  #screen {padding:20px; height:100vh; box-sizing:border-box; overflow-y:auto; white-space:pre-line;}
+  .glitch {animation: glitch 0.15s infinite;}
+  @keyframes glitch {
+    0% { text-shadow: 2px 0 red, -2px 0 blue; }
+    20% { text-shadow: -2px 0 red, 2px 0 blue; }
+    40% { text-shadow: 2px 2px red, -2px -2px blue; }
+    60% { text-shadow: -2px -2px red, 2px 2px blue; }
+    80% { text-shadow: 2px -2px red, -2px 2px blue; }
+    100% { text-shadow: -2px 2px red, 2px -2px blue; }
+  }
+  @keyframes flash {
+    0%, 49% { background:black; }
+    50%, 100% { background:darkred; }
+  }
+  .flash {animation: flash 0.2s infinite;}
+</style>
+</head>
+<body>
+<div id="screen">
+  <h1 class="glitch">TROJAN ACTIVE - SYSTEM BREACH</h1>
+  <p>Scanning files...</p>
+</div>
+<audio id="alarm" loop preload="auto" src="https://www.soundjay.com/misc/sounds/siren-01.mp3"></audio>
+<audio id="beep" preload="auto" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+<script>
+  const screen = document.getElementById('screen');
+  const alarm = document.getElementById('alarm');
+  const beep = document.getElementById('beep');
+
+  const lines = [
+    '[!] Connecting to remote server...OK',
+    '[!] Uploading sensitive data...',
+    '[!] Encrypting C:/Users...',
+    '[!] Encrypting D:/Projects...',
+    '[!] Accessing webcam feed...OK',
+    '[!] Webcam snapshot saved to remote host',
+    '[!] Sending encryption key to attacker...',
+    '[!] Removing system restore points...',
+    '[!] Installing persistence module...',
+    '[!] WARNING: Files will be locked permanently!',
+  ];
+
+  let i = 0;
+  function addLine() {
+    if (i < lines.length) {
+      screen.innerHTML += "\n" + lines[i];
+      beep.play().catch(()=>{});
+      i++;
+      setTimeout(addLine, 500);
+    } else {
+      document.body.classList.add('flash');
+      screen.innerHTML += "\n\n*** SYSTEM LOCKED ***\n*** PAY 1 BTC TO RESTORE FILES ***\n*** ALL DATA WILL BE ERASED IN 60 SECONDS ***\n";
+      let countdown = 60;
+      const timer = setInterval(()=>{
+        screen.innerHTML += `\nDeleting in: ${countdown--}s`;
+        if(countdown < 0){
+          clearInterval(timer);
+          document.body.classList.remove('flash');
+          screen.innerHTML += "\n\n💀 KAMU KENA PRANK! 💀";
+          alarm.pause();
+        }
+      }, 1000);
+    }
+  }
+
+  alarm.play().catch(()=>{});
+  setTimeout(addLine, 1000);
+</script>
+</body>
+</html>
